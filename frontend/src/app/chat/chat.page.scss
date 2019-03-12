@@ -25,37 +25,7 @@ ion-content .scroll-content {
 
 .container {
 
-    .mostRecentReadMessage {
-        position: relative;
-        padding: 7px 0;
-        .msg-content {
-            color: #58db1b;
-            background-color: rgb(64, 104, 214);
-            float: left;        
-        }
-        .user-img {
-            position: absolute;
-            border-radius: 45px;
-            width: 45px;
-            height: 45px;
-            box-shadow: 0 0 2px rgba(0, 0, 0, 0.36);
-        }
-        .msg-detail {
-            width: 100%;
-            padding-left: 60px;
-            display: inline-block;
-            p {
-              margin: 0;
-            }
-            .msg-info {
-              p {
-                font-size: .8em;
-                color: #888;
-              }
-            }
-    
-        }
-      }    
+ 
   .message {
     position: relative;
     padding: 7px 0;
