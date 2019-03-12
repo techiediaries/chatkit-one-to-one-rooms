@@ -22,7 +22,7 @@ export class AuthService {
         return this.userService.create(userData).then((user: User) =>{
           const userId = `${user.name}${user.id}`;
           const roomId = "19376018";
-          const avatarURL = "https://image.flaticon.com/icons/png/128/149/149071.png";
+          const avatarURL = "http://127.0.0.1:3000/uploads/avatar.png";
           
           return this.chatkit.createUser({id: userId, 
              name: user.name,
@@ -37,6 +37,13 @@ export class AuthService {
           })
     
         });
+    }
+
+    public async updateUserAvatar(userData: any): Promise<any>{
+      const userId = userData.userId;
+      const avatarURL = userData.avatarURL;
+      console.log('update avatar', userId + ':' + avatarURL);
+      return this.chatkit.updateUser({id:userId, avatarURL:avatarURL});
     }
 
     public getToken(userId:  string): AuthenticationResponse {

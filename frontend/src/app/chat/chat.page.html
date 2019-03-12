@@ -13,9 +13,8 @@
 </ion-header>
 
 <ion-content #scrollArea padding>
-
   <div class="container">
-    <div *ngFor="let msg of messageList" class="message left">
+    <div  #messageId *ngFor="let msg of messageList" class="message left " [attr.data-message-id]="msg.id">
       <img class="user-img" [src]="msg.sender.avatarURL" alt="" src="">
       <div class="msg-detail">
         <div class="msg-info">
@@ -27,8 +26,13 @@
           <span class="triangle"></span>
           <img *ngIf="msg.attachment" [src]="msg.attachment.link"
           />
-          <p class="line-breaker ">{{msg.text}}</p>
+          <p class="line-breaker">{{msg.text}}</p>
         </div>
+        
+      </div>
+      <div class="msg-unread" *ngIf="isMostRecentReadMessage(messageId, msg)">
+        <p>Un-Read Messages: ({{unreadCount}})</p>
+
       </div>
     </div>
   </div>
@@ -40,7 +44,7 @@
   </div>
   <div class="input-wrap">
 
-    <textarea #messageInput placeholder="Enter your message!" [(ngModel)]="chatMessage" (keyup.enter)="sendMessage()" (keydown)="onKeydown($event)" (keyup)="onKeyup($event)" (focusin)="scrollToBottom()">
+    <textarea #messageInput placeholder="Enter your message!" [(ngModel)]="chatMessage" (keyup.enter)="sendMessage()" (keydown)="onKeydown($event)" (keyup)="onKeyup($event)" (focusin)="onFocus()">
     </textarea>
     <input #messageAttachment type="file" accept="image/x-png,image/gif,image/jpeg"
      name="myAttachment" (change)="attachFile($event)" style = "display: none;"/>

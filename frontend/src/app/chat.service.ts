@@ -95,8 +95,32 @@ export class ChatService {
   sendTypingEvent(roomId = this.GENERAL_ROOM_ID){
     return this.currentUser.isTypingIn({ roomId: roomId });
   }
+  // 1
+  setReadCursor(messageId: number , roomId = this.GENERAL_ROOM_ID){
+    this.currentUser.setReadCursor({
+      roomId: roomId,
+      position: messageId
+    })
+  }
+  // 2
+  getReadCursor(roomId = this.GENERAL_ROOM_ID){
+    console.log("read")
+    const cursor = this.currentUser.readCursor({
+      roomId: roomId
+    })
+
+    
+    console.log(`read up to message ID ${
+      cursor.position
+    } in ${
+      cursor.room.name
+    }.`)
+
+    return cursor.position;
+  }
 
   getTypingUsers(){
     return this.typingUsers;
   }
+  
 }
