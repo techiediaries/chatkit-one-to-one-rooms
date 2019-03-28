@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnDestroy } from '@angular/core';
 import { OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { ChatService } from '../chat.service';
@@ -10,9 +10,10 @@ import { Storage } from '@ionic/storage';
   templateUrl: 'home.page.html',
   styleUrls: ['home.page.scss'],
 })
-export class HomePage implements OnInit {
+export class HomePage implements OnInit, OnDestroy {
   userId: string = '';
   userList: any = [];
+  getUsersSubscription;
   constructor(private chatService: ChatService, private route: ActivatedRoute, private storage: Storage) { 
     
   }
@@ -22,9 +23,14 @@ export class HomePage implements OnInit {
     //console.log("user id", this.userId);
 
     this.chatService.connectToChatkit(this.userId);
-    this.chatService.getUsers().subscribe((users) => {
+    this.getUsersSubscription = this.chatService.getUsers().subscribe((users) => {
       this.userList = users;
     });
+  }
+
+  // 66 - also import and implemtn OnDestroy, define and assign the getUsersSubscription
+  ngOnDestroy(){
+    this.getUsersSubscription.unsubscribe();
   }
 
   isOnline(user) {

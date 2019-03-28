@@ -9,11 +9,13 @@ export class ChatService {
 
   AUTH_URL = 'http://localhost:3000/token';
   INSTANCE_LOCATOR = 'v1:us1:8974881e-3870-47b4-9053-14dad6c0e314';
-  GENERAL_ROOM_ID = '19374915';
+  GENERAL_ROOM_ID = "19376018";
   GENERAL_ROOM_INDEX = 0;
 
   chatManager: ChatManager;
-  currentUser;
+  
+  // 33 - make currentUser null
+  currentUser = null;
   messages = [];
 
 
@@ -24,7 +26,13 @@ export class ChatService {
 
   constructor() { }
 
+  //11 
+  isConnectedToChatkit(){
+    return this.currentUser !== null;
+  }
+  // 77 -change this to use local array messages instead of this.messages 
   async connectToChatkit(userId: string) {
+    let messages = [];
     this.chatManager = new ChatManager({
       instanceLocator: this.INSTANCE_LOCATOR,
       userId: userId,
@@ -33,13 +41,14 @@ export class ChatService {
 
     this.currentUser = await this.chatManager.connect();
 
+    //console.log("connect to Chatkit", this.currentUser);
     await this.currentUser.subscribeToRoom({
       roomId: this.GENERAL_ROOM_ID,
       hooks: {
 
         onMessage: message => {
-          this.messages.push(message);
-          this.messagesSubject.next(this.messages);
+          messages.push(message);
+          this.messagesSubject.next(messages);
         },
         onUserStartedTyping: user => {
           this.typingUsers.push(user.name);
@@ -102,21 +111,25 @@ export class ChatService {
       position: messageId
     })
   }
-  // 2
-  getReadCursor(roomId = this.GENERAL_ROOM_ID){
+  // 88 - change this
+  getReadCursor(roomId = this.GENERAL_ROOM_ID) {
     console.log("read")
     const cursor = this.currentUser.readCursor({
       roomId: roomId
     })
 
-    
-    console.log(`read up to message ID ${
-      cursor.position
-    } in ${
-      cursor.room.name
-    }.`)
+    if (cursor) {
+      console.log(`read up to message ID ${
+        cursor.position
+        } in ${
+        cursor.room.name
+        }.`)
 
-    return cursor.position;
+      return cursor.position;
+    } else {
+      return -1;
+    }
+
   }
 
   getTypingUsers(){
