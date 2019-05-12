@@ -1,8 +1,6 @@
-# Building a mobile app with Nest.js, Ionic 4 and Chatkit - Part 2: Build the backend
+# Adding one-to-one rooms to your Ionic 4 chat app
 
-
-In this first part of a tutorial series to learn how to build a full-stack mobile application with cutting-edge technologies like Ionic 4, Nest.js and Pusher's Chatkit you will be building the back-end of the application with Nest.js.
-
+In this tutorial, we'll learn how to add one-to-one chat rooms to a chat application built using Ionic 4 (With Angular), Nest.js and Chatkit. 
 
 ## Getting Started
 
@@ -18,21 +16,20 @@ You also need to have Node.js and NPM installed on your machine, if they are not
 First, clone the repository using
 
 ```
-git clone https://github.com/techiediaries/chatkit-nestjs-ionic.git 
+git clone https://github.com/techiediaries/chatkit-one-to-one-rooms.git
 
 ```
-
-Next, navigate inside the project's folder and install the dependenices:
+Next, navigate inside the server project and install the dependencies:
 
 ```bash
-cd chatkit-nestjs-ionic/server
+cd chatkit-one-to-one-rooms/server
 npm install
 ```
 
-Finally, start the development server using:
+Next, start the development server:
 
 ```bash
-npm start
+npm run start:dev
 ```
 
 

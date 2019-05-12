@@ -21,18 +21,7 @@ Next clone the repository using
 git clone https://github.com/techiediaries/chatkit-one-to-one-rooms.git
 ```
 
-Next, navigate inside the server project and install the dependencies:
 
-```bash
-cd chatkit-one-to-one-rooms/server
-npm install
-```
-
-Next, start the development server:
-
-```bash
-npm run start:dev
-```
 
 Finally navigate inside the frontend project and install the dependenices:
 
