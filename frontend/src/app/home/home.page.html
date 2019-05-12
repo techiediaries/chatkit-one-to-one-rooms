@@ -35,6 +35,13 @@
       <div class="user-presence">
           <ion-icon [class.user-online]="isOnline(user)" name="radio-button-on"></ion-icon>
       </div>  
+      <div>
+          <ion-button size="small" [routerLink]="['/private-chat',user.id]">
+            <ion-icon name="chatbubbles" ></ion-icon>
+          </ion-button>
+        
+      </div>  
+    
   </ion-item>
 </ion-list>
 </ion-content>

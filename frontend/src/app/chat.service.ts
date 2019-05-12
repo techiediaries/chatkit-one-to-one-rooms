@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Observable, BehaviorSubject } from 'rxjs';
+import { BehaviorSubject, Subject, Observable, ReplaySubject } from 'rxjs';
 import { ChatManager, TokenProvider } from '@pusher/chatkit-client';
 
 @Injectable({
@@ -72,6 +72,72 @@ export class ChatService {
 
   getMessages() {
     return this.messagesSubject;
+  }
+
+  // oo - 1
+  async connectToRoom(roomId){
+    console.log("Subscribe to room: ", roomId);
+    let messageSubject = new ReplaySubject();
+
+    await this.currentUser.subscribeToRoom({
+      roomId: roomId,
+      hooks: {
+
+        onMessage: message => {
+          console.log("Got message: ", message);
+          messageSubject.next(message);
+        }        
+      },
+      messageLimit: 20
+    }).then(currentRoom => {
+      console.log("Subscribed to room: ", roomId);
+    }); 
+    
+    return messageSubject;
+  }
+
+
+  getCurrentRoomId(otherUserId){
+
+    // new - changed this to behavior subject
+    
+    let returnObs = new BehaviorSubject(null);
+    let userRooms: Array<any> = this.currentUser.rooms;
+    const userId = this.currentUser.id;
+    let name = `${userId}-${otherUserId}`;
+    let altName = `${otherUserId}-${userId}`;
+    
+    let roomExists = userRooms.findIndex((room) =>{
+
+      if(room['name'] === name || room['name'] === altName)
+      {
+        return true;
+      }
+
+      return false;
+      
+    });    
+
+    if(roomExists !== -1) {
+      console.log("Room exists: ", userRooms[roomExists])
+      returnObs.next(userRooms[roomExists].id)
+      return returnObs;
+    }
+
+    this.currentUser.createRoom({
+      name,
+      private: true,
+      addUserIds: [otherUserId]
+    }).then(room => {
+
+      returnObs.next(room.id);
+      //this.connectToRoom(room.id);
+    })
+    .catch(err => {
+      console.log(`Error creating room ${err}`)
+    })
+
+    return returnObs;
   }
 
   sendMessage(message) {

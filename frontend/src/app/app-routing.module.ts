@@ -9,6 +9,7 @@ const routes: Routes = [
   { path: 'register', loadChildren: './register/register.module#RegisterPageModule' },
   { path: 'chat', canActivateChild: [AuthGuard],loadChildren: './chat/chat.module#ChatPageModule' },
   { path: 'profile', loadChildren: './profile/profile.module#ProfilePageModule' },
+  { path: 'private-chat', loadChildren: './private-chat/private-chat.module#PrivateChatPageModule' },
 ];
 
 @NgModule({
