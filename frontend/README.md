@@ -1,6 +1,6 @@
-# Building a mobile chat app with Nest.js and Ionic 4 - Part 3: Add support for typing indicators and file attachments
+# Adding one-to-one rooms to your Ionic 4 chat app
 
-In this tutorial, we'll start by securing the UI of our application using Angular guards then we'll learn how to add support for typing indicators and file attachments in the Ionic 4 and Chatkit application we've built our first tutorials. 
+In this tutorial, we'll learn how to add one-to-one chat rooms to a chat application built using Ionic 4 (With Angular), Nest.js and Chatkit. 
 
 ## Getting Started
 
@@ -18,14 +18,26 @@ To follow along with this tutorial you need to have these prerequisites:
 Next clone the repository using
 
 ```
-git clone https://github.com/techiediaries/chatkit-nestjs-ionic.git
-
+git clone https://github.com/techiediaries/chatkit-one-to-one-rooms.git
 ```
 
-Finally navigate inside the project's folder and install the dependenices:
+Next, navigate inside the server project and install the dependencies:
 
 ```bash
-cd cd chatkit-nestjs-ionic/frontend
+cd chatkit-one-to-one-rooms/server
+npm install
+```
+
+Next, start the development server:
+
+```bash
+npm run start:dev
+```
+
+Finally navigate inside the frontend project and install the dependenices:
+
+```bash
+cd chatkit-one-to-one-rooms/frontend
 npm install
 ```
 
