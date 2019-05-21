@@ -16,3 +16,5 @@ For step by step tutorials on how to create this project, you can read:
 
 [Adding authentication, typing indicators and file attachments to your Ionic 4 chat app](https://pusher.com/tutorials/ionic-chat-auth-attach)
 
+[Adding one-to-one rooms to your Ionic 4 chat app](https://pusher.com/tutorials/rooms-ionic-chat-nest)
+
